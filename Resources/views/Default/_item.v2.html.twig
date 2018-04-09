@@ -1,0 +1,16 @@
+<div class="col-md-{{ item.size|default('3') }} col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-{{ item.css_class|default('aqua') }}">
+            <i class="fa fa-{{ item.icon|default('bars') }}"></i></span>
+
+        <div class="info-box-content">
+            <a href="{{ path('easyadmin', { entity: item.entity, action: 'list' }) }}">
+                <span class="info-box-text">{{ item.label|default('items')|trans }}</span>
+            </a>
+
+            <span class="info-box-number">{{ item.count }}</span>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+</div>

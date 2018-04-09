@@ -1,0 +1,35 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+{% block content_title %}
+    {% spaceless %}
+        {{ dashboard.title|default('Welcome')|trans }}
+    {% endspaceless %}
+{% endblock %}
+{% block main %}
+    {% if dashboard.blocks|length > 0 %}
+        <div class="row">
+            {% for block in dashboard.blocks %}
+                <div class="col-md-{{ block.size|default('12') }}">
+                    <div class="box box-{{ block.css_class|default('solid') }}">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{ block.label }}</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            {% for entity, item in block.items %}
+                                {%  if item.template is not defined or item.template == 'v1' %}
+                                    {{ include('@EasyAdminDashboard/Default/_item.v1.html.twig', { item: item}) }}
+                                {% else %}
+                                    {{ include('@EasyAdminDashboard/Default/_item.'~item.template~'.html.twig', { item: item}) }}
+                                {% endif %}
+                            {%  endfor %}
+                            <!-- /.row -->
+                        </div>
+                        <!-- ./box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
