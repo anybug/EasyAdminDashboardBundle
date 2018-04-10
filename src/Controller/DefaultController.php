@@ -22,7 +22,13 @@ class DefaultController extends Controller
                             $count = $this->getBlockCount($item['class'], !empty($item['dql_filter']) ? $item['dql_filter'] : false);
                         }
                         $dashboard['blocks'][$key]['items'][$k]['count'] = $count;
-                        $dashboard['blocks'][$key]['items'][$k]['entity'] = $this->guessEntityFromClass($item['class']);
+						
+						if(!empty($item['entity'])){
+                            $entity = $item['entity'];
+                        }else {
+                            $entity = $this->guessEntityFromClass($item['class']);
+                        }
+                        $dashboard['blocks'][$key]['items'][$k]['entity'] = $entity;
                     }
                 }
             }
