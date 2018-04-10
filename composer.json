@@ -1,0 +1,41 @@
+{
+    "name": "easyadminfriends/easyadmindashboard-bundle",
+    "type": "symfony-bundle",
+    "description": "Dashboard/Homepage page for EasyAdminBundle",
+    "keywords": ["easyadmin", "dashboard"],
+    "homepage": "https://github.com/anybug/EasyAdminDashboardBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anybug",
+            "email": "support@anybug.fr"
+        },
+        {
+            "name": "EasyAdminBundle project",
+            "homepage": "https://github.com/EasyCorp/EasyAdminBundle"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "easycorp/easyadmin-bundle": "^1.17"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "EasyAdminFriends\\EasyAdminDashboardBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
