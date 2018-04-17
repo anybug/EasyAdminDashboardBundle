@@ -33,6 +33,8 @@ $bundles = array(
 documentation in progress
 full example:
 ````bash
+#app/config/config.yml
+
 easy_admin_dashboard:
     title: "Welcome to backend"
     blocks:
