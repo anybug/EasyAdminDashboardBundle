@@ -31,8 +31,33 @@ $bundles = array(
 
 ## Usage
 documentation in progress
-
-
+full example:
+````bash
+easy_admin_dashboard:
+    title: "Welcome to backend"
+    blocks:
+      Bloc1:
+        label: Products
+        size: 12
+        css_class: primary
+        items:
+          Item1:
+            label: "Active products in catalog"
+            size: 3
+            css_class: aqua
+            class: BackendBundle\Entity\Product
+            dql_filter: "entity.is_active = 1"
+            icon:  shopping-cart
+            link_label: "Product list"
+          Item2:
+            label: "Categories"
+            size: 3
+            css_class: green
+            class: BackendBundle\Entity\Category
+            entity: Category
+            icon:  list-ul
+            link_label: "Category list"
+````
 
 ## Roadmap and Contributions
 
