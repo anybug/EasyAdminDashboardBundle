@@ -74,7 +74,7 @@ class DefaultController extends Controller
 
         $q = $repo->{$query}();
 
-        $count = count($q);
+        $count = is_numeric($q) ? $q : count($q);
 
         return $count;
     }
