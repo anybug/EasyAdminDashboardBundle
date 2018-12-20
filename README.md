@@ -76,5 +76,5 @@ Contributions are more than welcome. Fork the project, and submit a PR when you'
 
 Remaining todos include:
 
-* Tests and test coverage
+* Tests coverage
 * Improved documentation
