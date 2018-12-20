@@ -1,4 +1,11 @@
-{% extends '@EasyAdmin/default/layout.html.twig' %}
+
+{% if(dashboard.template) %}
+    {% set template = dashboard.template %}
+{% else %}
+    {% set template = '@EasyAdmin/default/layout.html.twig' %}
+{% endif %}
+
+{% extends template %}
 {% block content_title %}
     {% spaceless %}
         {{ dashboard.title|default('Welcome')|trans }}
@@ -17,9 +24,9 @@
                         <div class="box-body">
                             {% for entity, item in block.items %}
                                 {%  if item.template is not defined or item.template == 'v1' %}
-                                    {{ include('@EasyAdminDashboard/Default/_item.v1.html.twig', { item: item}) }}
+                                    {{ include('@EasyAdminDashboard/Default/_item.v1.html.twig', { item: item, entity: entity}) }}
                                 {% else %}
-                                    {{ include('@EasyAdminDashboard/Default/_item.'~item.template~'.html.twig', { item: item}) }}
+                                    {{ include('@EasyAdminDashboard/Default/_item.'~item.template~'.html.twig', { item: item, entity: entity}) }}
                                 {% endif %}
                             {%  endfor %}
                             <!-- /.row -->

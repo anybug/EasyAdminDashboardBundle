@@ -37,6 +37,7 @@ full example:
 
 easy_admin_dashboard:
     title: "Welcome to backend"
+    template: '@Backend/Default/layout.html.twig'
     blocks:
       Bloc1:
         label: Products
