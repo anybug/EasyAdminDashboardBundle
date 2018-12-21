@@ -20,7 +20,7 @@ Use composer to require the latest stable version.
 $ composer require easyadminfriends/easyadmindashboard-bundle
 ````
 
-Then enable the bundle in your `AppKernel.php` file.
+Enable the bundle in your `AppKernel.php` file.
 
 ````php
 $bundles = array(
@@ -28,7 +28,7 @@ $bundles = array(
     new EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle(),
 );
 ````
-Then add easy_admin_dashboard route. This example includes /backend prefix but you can change it to fit your application route:
+Add easy_admin_dashboard route. This example includes /backend prefix but you can change it to fit your application route:
 ````bash
 #app/config/routing.yml
 
@@ -36,6 +36,15 @@ easy_admin_dashboard:
     resource: "@EasyAdminDashboardBundle/Resources/config/routing.yml"
     prefix:   /backend/dashboard
 ````
+
+Add Dashboard page entry in EasyAdmin menu:
+````bash
+#app/Resources/config.yml
+easy_admin:
+   design:
+      menu: 
+          - { label: "Dashboard", route: "easy_admin_dashboard_homepage", default: true, icon: 'dashboard'}
+````          
 
 ## Usage
 documentation in progress
