@@ -9,6 +9,13 @@ class DefaultController extends Controller
 
     public function indexAction()
     {
+        return $this->render('EasyAdminDashboardBundle:Default:index.html.twig', array(
+            'dashboard' => $this->getDashboardValues()
+        ));
+    }
+
+    private function getDashboardValues()
+    {
         $this->config = $this->container->getParameter('easyadmindashboard');
         $dashboard = $this->config ? $this->config : false;
 
@@ -22,8 +29,8 @@ class DefaultController extends Controller
                             $count = $this->getBlockCount($item['class'], !empty($item['dql_filter']) ? $item['dql_filter'] : false);
                         }
                         $dashboard['blocks'][$key]['items'][$k]['count'] = $count;
-						
-						if(!empty($item['entity'])){
+
+                        if(!empty($item['entity'])){
                             $entity = $item['entity'];
                         }else {
                             $entity = $this->guessEntityFromClass($item['class']);
@@ -34,9 +41,7 @@ class DefaultController extends Controller
             }
         }
 
-        return $this->render('EasyAdminDashboardBundle:Default:index.html.twig', array(
-            'dashboard' => $dashboard
-        ));
+        return $dashboard;
     }
 
     private function guessEntityFromClass($classname)
