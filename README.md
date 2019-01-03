@@ -5,7 +5,7 @@ This bundle is an extension for the Easycorp EasyAdminBundle
 allows you to create easily a user-friendly homepage with
 some counters, like a dashboard.
 
-![Alt text](/doc//img/dashboard.png?raw=true "Dashboard")
+![Alt text](/doc/img/dashboard.png?raw=true "Dashboard")
 
 ## Requirements
 
