@@ -1,11 +1,5 @@
+{% extends layout_template_path %}
 
-{% if(dashboard.template) %}
-    {% set template = dashboard.template %}
-{% else %}
-    {% set template = '@EasyAdmin/default/layout.html.twig' %}
-{% endif %}
-
-{% extends template %}
 {% block content_title %}
     {% spaceless %}
         {{ dashboard.title|default('Welcome')|trans }}

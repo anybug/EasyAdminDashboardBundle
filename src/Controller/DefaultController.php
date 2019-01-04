@@ -10,11 +10,25 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return $this->render('EasyAdminDashboardBundle:Default:index.html.twig', array(
-            'dashboard' => $this->getDashboardValues()
+            'dashboard' => $this->generateDashboardValues(),
+            'layout_template_path' => $this->getLayoutTemplate()
         ));
     }
 
-    private function getDashboardValues()
+    public function getLayoutTemplate()
+    {
+        $this->easyAdminConfig = $this->get('easyadmin.config.manager')->getBackendConfig();
+
+        $layoutTemplatePath = isset($entityConfig['templates']['layout'])
+            ? $entityConfig['templates']['layout']
+            : isset($this->easyAdminConfig['design']['templates']['layout'])
+                ? $this->easyAdminConfig['design']['templates']['layout']
+                : '@EasyAdmin/default/layout.html.twig';
+
+        return $layoutTemplatePath;
+    }
+
+    public function generateDashboardValues()
     {
         $this->config = $this->container->getParameter('easyadmindashboard');
         $dashboard = $this->config ? $this->config : false;
