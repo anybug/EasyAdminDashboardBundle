@@ -35,11 +35,6 @@ class Configuration implements ConfigurationInterface
                     ->info('The title displayed at the top of dashboard page.')
                 ->end()
 
-                ->scalarNode('template')
-                    ->defaultValue('@EasyAdmin/default/layout.html.twig')
-                    ->info('Put custom template name here if you are already overriding easyadmin default layout.')
-                ->end()
-
                 ->arrayNode('blocks')
                     ->normalizeKeys(false)
                     ->useAttributeAsKey('name', false)
