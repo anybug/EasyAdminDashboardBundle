@@ -9,7 +9,7 @@ class DefaultController extends Controller
 
     public function indexAction()
     {
-        return $this->render('EasyAdminDashboardBundle:Default:index.html.twig', array(
+        return $this->render('@EasyAdminDashboard/Default/index.html.twig', array(
             'dashboard' => $this->generateDashboardValues(),
             'layout_template_path' => $this->getLayoutTemplate()
         ));

@@ -1,0 +1,28 @@
+{#<div class="col-lg-{{ item.size|default('2') }}">
+    <!-- small box -->
+    <div class="small-box bg-{{ item.css_class|default('aqua') }}">
+        <div class="inner">
+            <h3>{{ item.count }}</h3>
+            <p>{{ item.label|default('items')|trans }}</p>
+        </div>
+        <div class="icon">
+            <i class="fa fa-{{ item.icon|default('bars') }}"></i>
+        </div>
+        <a href="{{ path('easyadmin', { entity: entity, action: 'list' }) }}" class="small-box-footer">{{ item.link_label|default('Show list')|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+</div>
+#}
+<div class="col-{{ item.size|default('3') }}">
+	<div class="card border-{{ item.css_class|default('secondary') }}">
+	  <div class="card-header text-{{ item.css_class|default('dark') }}">
+		{% if item.icon is defined and item.icon %}<i class="fa fa-{{ item.icon }}"></i> {% endif %}{{ item.label|default('items')|trans }} <span class="badge badge-primary">{{ item.count }}</span></div>
+	  <div class="card-body">
+		{% if item.description is defined and item.description %}
+			<p class="card-text">{{ item.description|trans }}</p>
+		{% endif %}
+		{% if item.link_label is defined %}
+			<a href="{{ path('easyadmin', { entity: entity, action: 'list' }) }}" class="btn btn-{{ item.css_class|default('dark') }}">{{ item.link_label|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+		{% endif %}
+	  </div>
+	</div>
+</div>
