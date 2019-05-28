@@ -12,7 +12,7 @@
 			  <h3 class="text-{{ block.css_class|default('secondary') }}">
 				{{ block.label }}
 			  </h3>
-			  <div class="card-body">
+			  <div class="card-body card-group">
 					{% for entity, item in block.items %}
 						{{ include('@EasyAdminDashboard/Default/_item.html.twig', { item: item, entity: entity}) }}
 					{%  endfor %}
