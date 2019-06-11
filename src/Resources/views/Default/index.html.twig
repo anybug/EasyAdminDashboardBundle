@@ -6,18 +6,21 @@
     {% endspaceless %}
 {% endblock %}
 {% block main %}
+    {{ parent() }}
     {% if dashboard.blocks|length > 0 %}
+        <div class="row m-1">
         {% for block in dashboard.blocks %}
-			<div class="mt-4 col-{{ block.size|default('12') }} border-bottom border-light">
-			  <h3 class="text-{{ block.css_class|default('secondary') }}">
-				{{ block.label }}
-			  </h3>
-			  <div class="card-body card-group">
-					{% for entity, item in block.items %}
-						{{ include('@EasyAdminDashboard/Default/_item.html.twig', { item: item, entity: entity}) }}
-					{%  endfor %}
-			  </div>
-			</div>
+                <div class="mt-3 pb-3 col-{{ block.size|default('12') }} border-bottom border-light">
+                  <h3 class="text-{{ block.css_class|default('secondary') }} mb-3">
+                    {{ block.label }}
+                  </h3>
+                  <div class="card-group">
+                        {% for entity, item in block.items %}
+                            {{ include('@EasyAdminDashboard/Default/_item.html.twig', { item: item, entity: entity}) }}
+                        {%  endfor %}
+                  </div>
+                </div>
         {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}
