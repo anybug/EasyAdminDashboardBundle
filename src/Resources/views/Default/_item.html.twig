@@ -1,14 +1,19 @@
 <div class="col-{{ item.size|default('3') }}">
-	<div class="card border-{{ item.css_class|default('secondary') }}">
-	  <div class="card-header text-{{ item.css_class|default('dark') }}">
-		{% if item.icon is defined and item.icon %}<i class="fa fa-{{ item.icon }}"></i> {% endif %}{{ item.label|default('items')|trans }} <span class="badge badge-primary">{{ item.count }}</span></div>
-	  <div class="card-body">
-		{% if item.description is defined and item.description %}
-			<p class="card-text">{{ item.description|trans }}</p>
-		{% endif %}
-		{% if item.link_label is defined %}
-			<a href="{{ path('easyadmin', { entity: entity, action: 'list' }) }}" class="btn btn-{{ item.css_class|default('dark') }}">{{ item.link_label|trans }} <i class="fa fa-arrow-circle-right"></i></a>
-		{% endif %}
-	  </div>
-	</div>
+    <div class="card border-{{ item.css_class|default('secondary') }}">
+        <div class="card-header bg-light">
+            <h5>
+                {% if item.link_label is defined %}<a href="{{ path('easyadmin', { entity: entity, action: 'list' }) }}" class="text-{{ item.css_class|default('secondary') }}">{% endif %}
+                    {% if item.icon is defined and item.icon %}<i class="fa fa-{{ item.icon }}"></i> {% endif %}{{ item.label|default('items')|trans }} <span class="badge badge-dark">{{ item.count }}</span>
+                    {% if item.link_label is defined %}</a>{% endif %}
+            </h5>
+        </div>
+        <div class="card-body bg-{{ item.css_class|default('secondary') }}">
+            {% if item.description is defined and item.description %}
+                <p class="card-text text-light">{{ item.description|trans }}</p>
+            {% endif %}
+            {% if item.link_label is defined %}
+                <a href="{{ path('easyadmin', { entity: entity, action: 'list' }) }}" class="btn btn-light btn-lg">{{ item.link_label|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+            {% endif %}
+        </div>
+    </div>
 </div>

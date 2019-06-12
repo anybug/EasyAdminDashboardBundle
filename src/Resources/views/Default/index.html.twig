@@ -7,17 +7,22 @@
 {% endblock %}
 {% block main %}
     {{ parent() }}
+    <style>
+        .content-body {
+            background-color: rgba(0,0,0,.03);
+        }
+    </style>
     {% if dashboard.blocks|length > 0 %}
-        <div class="row m-1">
+        <div class="dashboard-content row m-1">
         {% for block in dashboard.blocks %}
                 <div class="mt-3 pb-3 col-{{ block.size|default('12') }} border-bottom border-light">
                   <h3 class="text-{{ block.css_class|default('secondary') }} mb-3">
                     {{ block.label }}
                   </h3>
                   <div class="card-group">
-                        {% for entity, item in block.items %}
-                            {{ include('@EasyAdminDashboard/Default/_item.html.twig', { item: item, entity: entity}) }}
-                        {%  endfor %}
+                      {% for entity, item in block.items %}
+                          {{ include('@EasyAdminDashboard/Default/_item.html.twig', { block: block, item: item, entity: entity}) }}
+                      {%  endfor %}
                   </div>
                 </div>
         {% endfor %}
