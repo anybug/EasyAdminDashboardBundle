@@ -17,7 +17,7 @@
         {% for block in dashboard.blocks %}
                 <div class="mt-3 pb-3 col-{{ block.size|default('12') }} border-bottom border-light">
                   <h3 class="text-{{ block.css_class|default('secondary') }} mb-3">
-                    {{ block.label }}
+                    {{ block.label|trans }}
                   </h3>
                   <div class="card-group">
                       {% for entity, item in block.items %}
