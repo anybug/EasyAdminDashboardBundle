@@ -1,9 +1,9 @@
 {% extends layout_template_path %}
 
 {% block content_title %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ dashboard.title|default('Welcome')|trans }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 {% block main %}
     {{ parent() }}
