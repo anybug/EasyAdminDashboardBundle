@@ -61,6 +61,7 @@ easy_admin_dashboard:
         label: Products
         size: 12
         css_class: primary
+        permission: ['ROLE_AAAAA','ROLE_BBBBB']
         items:
           Item1:
             label: "Active products in catalog"
@@ -70,6 +71,7 @@ easy_admin_dashboard:
             dql_filter: "entity.is_active = 1"
             icon:  shopping-cart
             link_label: "Product list"
+            permission: 'ROLE_CCCCC'
           Item2:
             label: "Categories"
             size: 3
