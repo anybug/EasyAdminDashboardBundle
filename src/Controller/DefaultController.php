@@ -50,8 +50,10 @@ class DefaultController extends Controller
                             $entity = $this->guessEntityFromClass($item['class']);
                         }
                         $dashboard['blocks'][$key]['items'][$k]['entity'] = $entity;
+                        $dashboard['blocks'][$key]['items'][$k]['permission'] = $dashboard['blocks'][$key]['items'][$k]['permission'] ?? null;
                     }
                 }
+                $dashboard['blocks'][$key]['permission'] = $dashboard['blocks'][$key]['permission'] ?? null;
             }
         }
 

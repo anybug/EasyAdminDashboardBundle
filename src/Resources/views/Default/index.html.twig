@@ -11,20 +11,26 @@
         .content-body {
             background-color: rgba(0,0,0,.03);
         }
+
+        .card {
+            margin-bottom: 30px;
+        }
     </style>
     {% if dashboard.blocks|length > 0 %}
         <div class="dashboard-content row m-1">
         {% for block in dashboard.blocks %}
+            {% if easyadmin_is_granted(block.permission) %}
                 <div class="mt-3 pb-3 col-{{ block.size|default('12') }} border-bottom border-light">
                   <h3 class="text-{{ block.css_class|default('secondary') }} mb-3">
                     {{ block.label|trans }}
                   </h3>
                   <div class="card-group">
                       {% for entity, item in block.items %}
-                          {{ include('@EasyAdminDashboard/Default/_item.html.twig', { block: block, item: item, entity: entity}) }}
+                          {% if easyadmin_is_granted(item.permission) %}{{ include('@EasyAdminDashboard/Default/_item.html.twig', { block: block, item: item, entity: entity}) }}{% endif %}
                       {%  endfor %}
                   </div>
                 </div>
+            {% endif %}
         {% endfor %}
         </div>
     {% endif %}
