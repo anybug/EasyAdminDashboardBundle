@@ -19,11 +19,13 @@ class DefaultController extends Controller
     {
         $this->easyAdminConfig = $this->get('easyadmin.config.manager')->getBackendConfig();
 
-        $layoutTemplatePath = isset($entityConfig['templates']['layout'])
-            ? $entityConfig['templates']['layout']
-            : isset($this->easyAdminConfig['design']['templates']['layout'])
-                ? $this->easyAdminConfig['design']['templates']['layout']
-                : '@EasyAdmin/default/layout.html.twig';
+        if(isset($entityConfig['templates']['layout'])){
+            $layoutTemplatePath = $entityConfig['templates']['layout'];
+        }elseif(isset($this->easyAdminConfig['design']['templates']['layout'])){
+            $layoutTemplatePath = $this->easyAdminConfig['design']['templates']['layout'];
+        }else{
+            $layoutTemplatePath = '@EasyAdmin/default/layout.html.twig'
+        }
 
         return $layoutTemplatePath;
     }
