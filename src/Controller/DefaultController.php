@@ -24,7 +24,7 @@ class DefaultController extends Controller
         }elseif(isset($this->easyAdminConfig['design']['templates']['layout'])){
             $layoutTemplatePath = $this->easyAdminConfig['design']['templates']['layout'];
         }else{
-            $layoutTemplatePath = '@EasyAdmin/default/layout.html.twig'
+            $layoutTemplatePath = '@EasyAdmin/default/layout.html.twig';
         }
 
         return $layoutTemplatePath;
