@@ -11,8 +11,9 @@ some counters, like a dashboard.
 
 This bundle requires, in addition to prerequisites of each PHPOffice library:
 
-    * PHP 5.6 or higher
-    * Symfony 2.7, 3.0
+    * PHP 7.0 or higher
+    * Symfony 2.7, 3.4, 4.4
+    * EasyAdmin 2
     
 ## Installation
 
@@ -22,7 +23,7 @@ Use composer to require the latest stable version.
 $ composer require easyadminfriends/easyadmindashboard-bundle
 ````
 
-Enable the bundle in your `AppKernel.php` file.
+Symfony <= 3 : Enable the bundle in your `app/AppKernel.php` file.
 
 ````php
 $bundles = array(
@@ -30,6 +31,17 @@ $bundles = array(
     new EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle(),
 );
 ````
+
+Symfony 4 : Enable the bundle in your `config/bundles.php` file.
+
+````php
+return [
+    [...]
+    EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle::class => ['all' => true],
+];
+````
+
+
 Add easy_admin_dashboard route. This example includes /backend prefix but you can change it to fit your application route:
 ````bash
 #app/config/routing.yml
