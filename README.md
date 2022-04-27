@@ -9,10 +9,12 @@ some counters, like a dashboard.
 
 ## Requirements
 
-This bundle requires, in addition to prerequisites of each PHPOffice library:
+This bundle requires :
 
-    * PHP 5.6 or higher
-    * Symfony 2.7, 3.0
+    * PHP 7.0 or higher
+    * Symfony 2.7, 3.4, 4.4
+    * EasyAdmin 2
+    
     
 ## Installation
 
@@ -22,7 +24,7 @@ Use composer to require the latest stable version.
 $ composer require easyadminfriends/easyadmindashboard-bundle
 ````
 
-Enable the bundle in your `AppKernel.php` file.
+Symfony <= 3 : Enable the bundle in your `app/AppKernel.php` file.
 
 ````php
 $bundles = array(
@@ -30,6 +32,17 @@ $bundles = array(
     new EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle(),
 );
 ````
+
+Symfony 4 : Enable the bundle in your `config/bundles.php` file.
+
+````php
+return [
+    [...]
+    EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle::class => ['all' => true],
+];
+````
+
+
 Add easy_admin_dashboard route. This example includes /backend prefix but you can change it to fit your application route:
 ````bash
 #app/config/routing.yml
@@ -56,12 +69,12 @@ full example:
 
 easy_admin_dashboard:
     title: "Welcome to backend"
-    template: '@Backend/Default/layout.html.twig'
     blocks:
       Bloc1:
         label: Products
         size: 12
         css_class: primary
+        permission: ['ROLE_AAAAA','ROLE_BBBBB']
         items:
           Item1:
             label: "Active products in catalog"
@@ -71,6 +84,7 @@ easy_admin_dashboard:
             dql_filter: "entity.is_active = 1"
             icon:  shopping-cart
             link_label: "Product list"
+            permission: 'ROLE_CCCCC'
           Item2:
             label: "Categories"
             size: 3
