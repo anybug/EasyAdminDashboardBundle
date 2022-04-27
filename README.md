@@ -20,7 +20,7 @@ This bundle requires, in addition to prerequisites of each PHPOffice library:
 Use composer to require the latest stable version.
 
 ````bash
-$ composer require easyadminfriends/easyadmindashboard-bundle
+$ composer require easyadminfriends/easyadmindashboard-bundle:2.x
 ````
 
 Enable the bundle in your `config/bundles.php` file.
