@@ -8,7 +8,7 @@ class DefaultController extends AbstractController
 {
     public function getLayoutTemplate()
     {
-        $config = $this->getParameter('easyadmindashboard');
+        $config = $this->getParameter('easy_admin_dashboard');
         $dashboard = $config ?? false;
 
         if(!empty($dashboard['layout'])){
@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
 
     public function generateDashboardValues()
     {
-        $config = $this->getParameter('easyadmindashboard');
+        $config = $this->getParameter('easy_admin_dashboard');
         $dashboard = $config ?? false;
 
         if(!empty($dashboard['blocks'])){

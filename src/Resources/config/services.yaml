@@ -1,4 +1,6 @@
 services:
-#    easy_admin_dashboard.example:
-#        class: EasyadminFriends\EasyAdminDashboardBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+#    ea.dashboard.bundle:
+#        class: EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController
+#        calls:
+#            - [setContainer, ["@service_container"]]
+#        public: true
