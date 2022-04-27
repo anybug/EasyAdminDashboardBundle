@@ -1,3 +1,0 @@
-easy_admin_dashboard_homepage:
-    path:     /
-    defaults: { _controller: EasyAdminDashboardBundle:Default:index }

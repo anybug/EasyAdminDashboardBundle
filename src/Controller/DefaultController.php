@@ -2,29 +2,19 @@
 
 namespace EasyAdminFriends\EasyAdminDashboardBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
-
-    public function indexAction()
-    {
-        return $this->render('@EasyAdminDashboard/Default/index.html.twig', array(
-            'dashboard' => $this->generateDashboardValues(),
-            'layout_template_path' => $this->getLayoutTemplate()
-        ));
-    }
-
     public function getLayoutTemplate()
     {
-        $this->easyAdminConfig = $this->get('easyadmin.config.manager')->getBackendConfig();
+        $config = $this->getParameter('easyadmindashboard');
+        $dashboard = $config ?? false;
 
-        if(isset($entityConfig['templates']['layout'])){
-            $layoutTemplatePath = $entityConfig['templates']['layout'];
-        }elseif(isset($this->easyAdminConfig['design']['templates']['layout'])){
-            $layoutTemplatePath = $this->easyAdminConfig['design']['templates']['layout'];
+        if(!empty($dashboard['layout'])){
+            $layoutTemplatePath = $dashboard['layout'];
         }else{
-            $layoutTemplatePath = '@EasyAdmin/default/layout.html.twig';
+            $layoutTemplatePath = '@EasyAdmin/page/content.html.twig';
         }
 
         return $layoutTemplatePath;
@@ -32,8 +22,8 @@ class DefaultController extends Controller
 
     public function generateDashboardValues()
     {
-        $this->config = $this->container->getParameter('easyadmindashboard');
-        $dashboard = $this->config ? $this->config : false;
+        $config = $this->getParameter('easyadmindashboard');
+        $dashboard = $config ?? false;
 
         if(!empty($dashboard['blocks'])){
             foreach($dashboard['blocks'] as $key=>$block){
@@ -52,10 +42,10 @@ class DefaultController extends Controller
                             $entity = $this->guessEntityFromClass($item['class']);
                         }
                         $dashboard['blocks'][$key]['items'][$k]['entity'] = $entity;
-                        $dashboard['blocks'][$key]['items'][$k]['permission'] = $dashboard['blocks'][$key]['items'][$k]['permission'] ?? null;
+                        $dashboard['blocks'][$key]['items'][$k]['permissions'] = $dashboard['blocks'][$key]['items'][$k]['permissions'] ?? ['ROLE_USER'];
                     }
                 }
-                $dashboard['blocks'][$key]['permission'] = $dashboard['blocks'][$key]['permission'] ?? null;
+                $dashboard['blocks'][$key]['permissions'] = $dashboard['blocks'][$key]['permissions'] ?? ['ROLE_USER'];
             }
         }
 

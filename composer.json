@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "easycorp/easyadmin-bundle": "^2.0"
+        "php": ">=7.2.0",
+        "easycorp/easyadmin-bundle": "^3.0"
     },
     "require-dev": {
     },

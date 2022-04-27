@@ -6,5 +6,5 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EasyAdminDashboardBundle extends Bundle
 {
-    const VERSION = '2.0';
+    public const VERSION = '3.0';
 }

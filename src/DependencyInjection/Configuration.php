@@ -18,8 +18,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('easy_admin_dashboard');
+        $treeBuilder = new TreeBuilder('easy_admin_dashboard');
+        $rootNode = $treeBuilder->getRootNode();
 
         $this->addDashboardSection($rootNode);
 
