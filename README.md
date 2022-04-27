@@ -67,7 +67,7 @@ class DashboardController extends AbstractDashboardController
     public function configureCrud(): Crud
     {
 		...
-	}
+    }
 ...
 ````   
 
@@ -105,8 +105,8 @@ parameters:
             controller: App\Controller\Admin\ProductCategoryCrudController
             icon:  list-ul
             link_label: "Category list"
-			permissions: ['ROLE_ADMIN']
-			dql_filter: "entity.is_active = 1"
+	    permissions: ['ROLE_ADMIN']
+	    dql_filter: "entity.is_active = 1"
 			
 ````
 
