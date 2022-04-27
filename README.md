@@ -11,7 +11,7 @@ some counters, like a dashboard.
 
 This bundle requires :
 
-    * PHP 7.0 or higher
+    * PHP 7.2 or higher
     * Symfony 2.7, 3.4, 4.4
     * EasyAdmin 2
     
@@ -21,7 +21,7 @@ This bundle requires :
 Use composer to require the latest stable version.
 
 ````bash
-$ composer require easyadminfriends/easyadmindashboard-bundle
+$ composer require easyadminfriends/easyadmindashboard-bundle:1.x
 ````
 
 Symfony <= 3 : Enable the bundle in your `app/AppKernel.php` file.
