@@ -11,9 +11,9 @@ some counters, like a dashboard.
 
 This bundle requires, in addition to prerequisites of each PHPOffice library:
 
-    * PHP 7.0 or higher
-    * Symfony 2.7, 3.4, 4.4
-    * EasyAdmin 2
+    * PHP 7.2 or higher
+    * Symfony 5.3
+    * EasyAdmin 3
     
 ## Installation
 
@@ -23,16 +23,7 @@ Use composer to require the latest stable version.
 $ composer require easyadminfriends/easyadmindashboard-bundle
 ````
 
-Symfony <= 3 : Enable the bundle in your `app/AppKernel.php` file.
-
-````php
-$bundles = array(
-    [...]
-    new EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle(),
-);
-````
-
-Symfony 4 : Enable the bundle in your `config/bundles.php` file.
+Enable the bundle in your `config/bundles.php` file.
 
 ````php
 return [
@@ -41,57 +32,82 @@ return [
 ];
 ````
 
-
-Add easy_admin_dashboard route. This example includes /backend prefix but you can change it to fit your application route:
+Add Dashboard service :
 ````bash
-#app/config/routing.yml
+#config/services.yaml
+services:
 
-easy_admin_dashboard:
-    resource: "@EasyAdminDashboardBundle/Resources/config/routing.yml"
-    prefix:   /backend/dashboard
-````
-
-Add Dashboard page entry in EasyAdmin menu:
-````bash
-#app/Resources/config.yml
-easy_admin:
-   design:
-      menu: 
-          - { label: "Dashboard", route: "easy_admin_dashboard_homepage", default: true, icon: 'dashboard'}
+    EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController:
+        public: true
 ````          
+
+Generate dashboard items inside Easyadmin Dashboard Controller
+````bash
+#App\Controller\Admin\DashboardController
+...
+use EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController as EasyAdminDashboard;
+
+class DashboardController extends AbstractDashboardController
+{
+    private $easyAdminDashboard;
+
+    public function __construct(EasyAdminDashboard $easyAdminDashboard)
+    {
+        $this->easyAdminDashboard = $easyAdminDashboard;
+    }
+
+    public function index(): Response
+    {
+        return $this->render('@EasyAdminDashboard/Default/index.html.twig', array(
+            'dashboard' => $this->easyAdminDashboard->generateDashboardValues(),
+            'layout_template_path' => $this->easyAdminDashboard->getLayoutTemplate()
+        ));
+    }
+
+    public function configureCrud(): Crud
+    {
+		...
+	}
+...
+````   
 
 ## Usage
 documentation in progress
 full example:
 ````bash
-#app/config/config.yml
+#config/packages/easy_admin_dashboard.yaml
 
-easy_admin_dashboard:
+parameters:
+  easy_admin_dashboard:
     title: "Welcome to backend"
     blocks:
       Bloc1:
         label: Products
         size: 12
         css_class: primary
-        permission: ['ROLE_AAAAA','ROLE_BBBBB']
+        permissions: ['ROLE_USER']
         items:
-          Item1:
+          Product:
             label: "Active products in catalog"
             size: 3
-            css_class: aqua
-            class: BackendBundle\Entity\Product
-            dql_filter: "entity.is_active = 1"
+            css_class: success text-dark
+			class: App\Entity\Product
+            controller: App\Controller\Admin\ProductCrudController
             icon:  shopping-cart
             link_label: "Product list"
-            permission: 'ROLE_CCCCC'
-          Item2:
+            permissions: ['ROLE_ADMIN']
+			query: MyCustomQuery
+          ProductCategory:
             label: "Categories"
             size: 3
             css_class: green
-            class: BackendBundle\Entity\Category
-            entity: Category
+            class: App\Entity\Category
+            controller: App\Controller\Admin\ProductCategoryCrudController
             icon:  list-ul
             link_label: "Category list"
+			permissions: ['ROLE_ADMIN']
+			dql_filter: "entity.is_active = 1"
+			
 ````
 
 ## Roadmap and Contributions
