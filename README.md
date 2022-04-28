@@ -91,12 +91,12 @@ parameters:
             label: "Active products in catalog"
             size: 3
             css_class: success text-dark
-			class: App\Entity\Product
+	    class: App\Entity\Product
             controller: App\Controller\Admin\ProductCrudController
             icon:  shopping-cart
             link_label: "Product list"
             permissions: ['ROLE_ADMIN']
-			query: MyCustomQuery
+	    query: MyCustomQuery
           ProductCategory:
             label: "Categories"
             size: 3
