@@ -11,9 +11,9 @@ some counters, like a dashboard.
 
 This bundle requires, in addition to prerequisites of each PHPOffice library:
 
-    * PHP 7.2 or higher
-    * Symfony 5.3
-    * EasyAdmin 3
+    * PHP 8.0 or higher
+    * Symfony 5.3 or higher
+    * EasyAdmin 3 or 4
     
 ## Installation
 
