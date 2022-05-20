@@ -27,6 +27,7 @@ class DefaultController extends AbstractController
 
         if(!empty($dashboard['blocks'])){
             foreach($dashboard['blocks'] as $key=>$block){
+                $dashboard['blocks'][$key]['permissions'] = $dashboard['blocks'][$key]['permissions'] ?? ['ROLE_USER'];
                 if(!empty($block['items'])){
                     foreach($block['items'] as $k=>$item){
                         if(!empty($item['query'])){
@@ -42,10 +43,10 @@ class DefaultController extends AbstractController
                             $entity = $this->guessEntityFromClass($item['class']);
                         }
                         $dashboard['blocks'][$key]['items'][$k]['entity'] = $entity;
-                        $dashboard['blocks'][$key]['items'][$k]['permissions'] = $dashboard['blocks'][$key]['items'][$k]['permissions'] ?? ['ROLE_USER'];
+
+                        $dashboard['blocks'][$key]['items'][$k]['permissions'] = $dashboard['blocks'][$key]['items'][$k]['permissions'] ?? $dashboard['blocks'][$key]['permissions'];
                     }
                 }
-                $dashboard['blocks'][$key]['permissions'] = $dashboard['blocks'][$key]['permissions'] ?? ['ROLE_USER'];
             }
         }
 
@@ -60,7 +61,7 @@ class DefaultController extends AbstractController
 
     private function getBlockCount($class, $dql_filter)
     {
-        $this->em = $this->getDoctrine()->getManagerForClass($class);
+        $this->em = $this->container->get('doctrine')->getManagerForClass($class);
 
         $qb = $this->em->createQueryBuilder('entity');
         $qb->select('count(entity.id)');
@@ -77,7 +78,7 @@ class DefaultController extends AbstractController
 
     private function executeCustomQuery($class, $query)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->container->get('doctrine')->getManager();
 
         $repo = $em->getRepository($class);
 
