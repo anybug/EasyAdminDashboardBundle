@@ -3,9 +3,17 @@
 namespace EasyAdminFriends\EasyAdminDashboardBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 
 class DefaultController extends AbstractController
 {
+    private ManagerRegistry $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+
     public function getLayoutTemplate()
     {
         $config = $this->getParameter('easy_admin_dashboard');
@@ -61,9 +69,9 @@ class DefaultController extends AbstractController
 
     private function getBlockCount($class, $dql_filter)
     {
-        $this->em = $this->container->get('doctrine')->getManagerForClass($class);
+        $em = $this->doctrine->getManagerForClass($class);
 
-        $qb = $this->em->createQueryBuilder('entity');
+        $qb = $em->createQueryBuilder('entity');
         $qb->select('count(entity.id)');
         $qb->from($class, 'entity');
 
@@ -78,7 +86,7 @@ class DefaultController extends AbstractController
 
     private function executeCustomQuery($class, $query)
     {
-        $em = $this->container->get('doctrine')->getManager();
+        $em = $this->doctrine->getManager();
 
         $repo = $em->getRepository($class);
 

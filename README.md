@@ -39,6 +39,7 @@ services:
 
     EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController:
         public: true
+        tags: ['doctrine']
 ````          
 
 Generate dashboard items inside Easyadmin Dashboard Controller
