@@ -1,0 +1,17 @@
+{# templates/bundles/EasyAdminDashboardBundle/layout.html.twig #}
+{% extends dashboard.layout|default('@EasyAdmin/layout.html.twig') %}
+
+{# Bloc facultatif : titre général du back-office #}
+{% block page_title %}
+    {{ dashboard.title|default('Dashboard') }}
+{% endblock %}
+
+{# Titre dans la section de contenu #}
+{% block content_title %}
+    {{ dashboard.title|default('Dashboard') }}
+{% endblock %}
+
+{# Contenu principal (sera injecté par index.html.twig) #}
+{% block main %}
+    {% block dashboard_main %}{% endblock %}
+{% endblock %}

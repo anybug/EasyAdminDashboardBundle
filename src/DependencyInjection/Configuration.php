@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('easy_admin_dashboard');
         $rootNode = $treeBuilder->getRootNode();
@@ -26,23 +26,53 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addDashboardSection(ArrayNodeDefinition $rootNode)
+    private function addDashboardSection(ArrayNodeDefinition $rootNode):void
     {
         $rootNode
             ->children()
                 ->scalarNode('title')
                     ->defaultValue('Welcome')
-                    ->info('The title displayed at the top of dashboard page.')
+                    ->info('The title displayed at the top of the dashboard page.')
                 ->end()
+                ->scalarNode('layout')->defaultNull()->end()
 
                 ->arrayNode('blocks')
-                    ->normalizeKeys(false)
-                    ->useAttributeAsKey('name', false)
-                    ->defaultValue(array())
-                    ->info('The list of blocks to display in the dashboard page.')
-                    ->prototype('variable')
+                    ->useAttributeAsKey('name')
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('label')->defaultNull()->end()
+                            ->integerNode('size')->defaultValue(12)->end()
+                            ->scalarNode('css_class')->defaultValue('')->end()
+                            ->arrayNode('permissions')
+                                ->scalarPrototype()->end()
+                                ->defaultValue([])
+                            ->end()
+
+                            ->arrayNode('items')
+                                ->useAttributeAsKey('name')
+                                ->arrayPrototype()
+                                    ->children()
+                                        ->scalarNode('label')->defaultNull()->end()
+                                        ->integerNode('size')->defaultValue(4)->end()
+                                        ->scalarNode('css_class')->defaultValue('')->end()
+                                        ->scalarNode('class')->isRequired()->end()
+                                        ->scalarNode('controller')->isRequired()->end()
+                                        ->scalarNode('icon')->defaultNull()->end()
+                                        ->scalarNode('link_label')->defaultNull()->end()
+                                        ->scalarNode('dql_filter')->defaultNull()->end()
+                                        ->arrayNode('permissions')
+                                            ->scalarPrototype()->end()
+                                            ->defaultValue([])
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+
+                        ->end()
+                    ->end()
                 ->end()
-            ->end()
-        ;
+
+            ->end();
+
     }
 }

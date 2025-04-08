@@ -1,6 +1,7 @@
 services:
-#    ea.dashboard.bundle:
-#        class: EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController
-#        calls:
-#            - [setContainer, ["@service_container"]]
-#        public: true
+  EasyAdminFriends\EasyAdminDashboardBundle\:
+    resource: '../../*'
+    exclude: '../../{Entity,Tests,Resources,Migrations}'
+    autowire: true
+    autoconfigure: true
+    public: false

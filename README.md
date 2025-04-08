@@ -9,60 +9,35 @@ some counters, like a dashboard.
 
 ## Requirements
 
-This bundle requires, in addition to prerequisites of each PHPOffice library:
+This bundle requires:
 
-    * PHP 8.0 or higher
-    * Symfony 5.3 or higher
-    * EasyAdmin 3 or 4
+    * PHP 8.2 or higher
+    * Symfony 6.4 or higher
+    * EasyAdmin 4
     
 ## Installation
 
 Use composer to require the latest stable version.
 
 ````bash
-$ composer require easyadminfriends/easyadmindashboard-bundle:2.x
-````
-
-Enable the bundle in your `config/bundles.php` file.
-
-````php
-return [
-    [...]
-    EasyAdminFriends\EasyAdminDashboardBundle\EasyAdminDashboardBundle::class => ['all' => true],
-];
-````
-
-Add Dashboard service :
-````bash
-#config/services.yaml
-services:
-
-    EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController:
-        public: true
-        tags: ['doctrine']
-````          
+$ composer require easyadminfriends/easyadmindashboard-bundle:3.x
+````    
 
 Generate dashboard items inside Easyadmin Dashboard Controller
 ````bash
 #App\Controller\Admin\DashboardController
 ...
-use EasyAdminFriends\EasyAdminDashboardBundle\Controller\DefaultController as EasyAdminDashboard;
+use EasyAdminFriends\EasyAdminDashboardBundle\Service\EasyAdminDashboard;
 
 class DashboardController extends AbstractDashboardController
 {
-    private $easyAdminDashboard;
-
-    public function __construct(EasyAdminDashboard $easyAdminDashboard)
-    {
-        $this->easyAdminDashboard = $easyAdminDashboard;
-    }
+    public function __construct(private EasyAdminDashboard $easyAdminDashboard){}
 
     public function index(): Response
     {
-        return $this->render('@EasyAdminDashboard/Default/index.html.twig', array(
-            'dashboard' => $this->easyAdminDashboard->generateDashboardValues(),
-            'layout_template_path' => $this->easyAdminDashboard->getLayoutTemplate()
-        ));
+        return $this->render('@EasyAdminDashboard/Default/index.html.twig', [
+            'dashboard' => $this->easyAdminDashboard->getDashboard()
+        ]);
     }
 
     public function configureCrud(): Crud
@@ -78,36 +53,35 @@ full example:
 ````bash
 #config/packages/easy_admin_dashboard.yaml
 
-parameters:
-  easy_admin_dashboard:
-    title: "Welcome to backend"
-    blocks:
-      Bloc1:
-        label: Products
-        size: 12
-        css_class: primary
-        permissions: ['ROLE_USER']
-        items:
-          Product:
-            label: "Active products in catalog"
-            size: 3
-            css_class: success text-dark
-	    class: App\Entity\Product
-            controller: App\Controller\Admin\ProductCrudController
-            icon:  shopping-cart
-            link_label: "Product list"
-            permissions: ['ROLE_ADMIN']
-	    query: MyCustomQuery
-          ProductCategory:
-            label: "Categories"
-            size: 3
-            css_class: green
-            class: App\Entity\Category
-            controller: App\Controller\Admin\ProductCategoryCrudController
-            icon:  list-ul
-            link_label: "Category list"
-	    permissions: ['ROLE_ADMIN']
-	    dql_filter: "entity.is_active = 1"
+easy_admin_dashboard:
+  title: "Welcome to backend"
+  blocks:
+    Bloc1:
+      label: Products
+      size: 12
+      css_class: primary
+      permissions: ['ROLE_USER']
+      items:
+        Product:
+          label: "Active products in catalog"
+          size: 3
+          css_class: success text-dark
+          class: App\Entity\Product
+          controller: App\Controller\Admin\ProductCrudController
+          icon:  shopping-cart
+          link_label: "Product list"
+          permissions: ['ROLE_ADMIN']
+          query: MyCustomQuery
+        ProductCategory:
+          label: "Categories"
+          size: 3
+          css_class: green
+          class: App\Entity\Category
+          controller: App\Controller\Admin\ProductCategoryCrudController
+          icon:  list-ul
+          link_label: "Category list"
+          permissions: ['ROLE_ADMIN']
+          dql_filter: "entity.is_active = 1"
 			
 ````
 
@@ -118,4 +92,3 @@ Contributions are more than welcome. Fork the project, and submit a PR when you'
 Remaining todos include:
 
 * Tests coverage
-* Improved documentation
