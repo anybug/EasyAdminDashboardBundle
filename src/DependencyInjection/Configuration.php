@@ -60,6 +60,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('icon')->defaultNull()->end()
                                         ->scalarNode('link_label')->defaultNull()->end()
                                         ->scalarNode('dql_filter')->defaultNull()->end()
+                                        ->scalarNode('query')->defaultNull()->end()
                                         ->arrayNode('permissions')
                                             ->scalarPrototype()->end()
                                             ->defaultValue([])
