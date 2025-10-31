@@ -13,8 +13,9 @@
                 <p class="card-text text-light">{{ item.description|trans }}</p>
             {% endif %}
             {% if item.link_label is defined %}
-                <a href="{{ ea_url().setController(item.controller).setAction('index').set('entityFqcn', item.class) }}" class="btn btn-light btn-lg">{{ item.link_label|trans }} <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ ea_url().setController(item.controller).setAction('index').set('entityFqcn', item.class) }}" class="btn btn-secondary btn-lg">{{ item.link_label|trans }} <i class="fa fa-arrow-circle-right"></i></a>
             {% endif %}
         </div>
     </div>
 </div>
+
