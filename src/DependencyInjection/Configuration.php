@@ -35,7 +35,6 @@ class Configuration implements ConfigurationInterface
                     ->info('The title displayed at the top of the dashboard page.')
                 ->end()
                 ->scalarNode('layout')->defaultNull()->end()
-
                 ->arrayNode('blocks')
                     ->useAttributeAsKey('name')
                     ->arrayPrototype()
@@ -47,7 +46,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarPrototype()->end()
                                 ->defaultValue([])
                             ->end()
-
+                            ->booleanNode('hierarchy')->defaultTrue()->end()
                             ->arrayNode('items')
                                 ->useAttributeAsKey('name')
                                 ->arrayPrototype()
@@ -65,6 +64,10 @@ class Configuration implements ConfigurationInterface
                                             ->scalarPrototype()->end()
                                             ->defaultValue([])
                                         ->end()
+                                        ->booleanNode('showCount')->defaultTrue()->end()
+                                        ->scalarNode('action')->defaultValue('index')->end()
+                                        ->scalarNode('field')->defaultNull()->end()
+                                        ->booleanNode('hierarchy')->defaultTrue()->end()
                                     ->end()
                                 ->end()
                             ->end()
