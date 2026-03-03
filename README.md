@@ -13,7 +13,7 @@ This bundle requires:
 
     * PHP 8.2 or higher
     * Symfony 6.4 or higher
-    * EasyAdmin 4
+    * EasyAdmin 4.2x
     
 ## Installation
 
@@ -72,6 +72,7 @@ easy_admin_dashboard:
           link_label: "Product list"
           permissions: ['ROLE_ADMIN']
           query: MyCustomQuery
+          hierarchy: false
         ProductCategory:
           label: "Categories"
           size: 3
