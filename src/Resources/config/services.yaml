@@ -5,3 +5,9 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+  EasyAdminFriends\EasyAdminDashboardBundle\Twig\EasyAdminDashboardExtension:
+    arguments:
+        $config: '%easy_admin_dashboard.config%'
+        $authorizationChecker: '@security.authorization_checker'
+        $tokenStorage: '@security.token_storage'
+    tags: ['twig.extension']

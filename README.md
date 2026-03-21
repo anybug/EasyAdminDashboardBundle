@@ -83,6 +83,8 @@ easy_admin_dashboard:
           link_label: "Category list"
           permissions: ['ROLE_ADMIN']
           dql_filter: "entity.is_active = 1"
+          showCount: false
+          action: 'detail'
 			
 ````
 

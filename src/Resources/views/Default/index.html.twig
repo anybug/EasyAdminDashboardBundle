@@ -4,25 +4,21 @@
     {{ parent() }}
     {% if dashboard.blocks|length > 0 %}
         <div class="dashboard-content row m-1">
-        {% for dblock in dashboard.blocks|default([]) %}
-            {% for permission in dblock.permissions %}
-                {% if is_granted(permission) %}
-                    <div class="mt-2 pb-2 col-{{ dblock.size|default('12') }} border-bottom border-light">
-                        <h3 class="text-{{ dblock.css_class|default('secondary') }} mb-3">
-                            {{ dblock.label|trans }}
-                        </h3>
-                        <div class="card-group">
-                            {% for entity, item in dblock.items|default([]) %}
-                                {% for permission in item.permissions|default([]) %}
-                                    {% if is_granted(permission) %}
-                                        {{ include('@EasyAdminDashboard/Default/_item.html.twig', { item: item, entity: entity }) }}
-                                    {%  endif %}
-                                {%  endfor %}
-                            {%  endfor %}
-                        </div>
+        {% for key, dblock in dashboard.blocks|default([]) %}
+            
+            {% if can_access_block(key) %}
+                <div class="mt-2 pb-2 col-{{ dblock.size|default('12') }} border-bottom border-light">
+                    <h3 class="text-{{ dblock.css_class|default('secondary') }} mb-3">
+                        {{ dblock.label|trans }}
+                    </h3>
+                    <div class="card-group">
+                        {% for entity, item in dblock.items|default([]) %}
+                            {{ include('@EasyAdminDashboard/Default/_item.html.twig', { item: item, entity: entity }) }} 
+                        {%  endfor %}
                     </div>
-                {% endif %}
-            {% endfor %}
+                </div>
+            {% endif %}
+            
         {% endfor %}
         </div>
     {% endif %}

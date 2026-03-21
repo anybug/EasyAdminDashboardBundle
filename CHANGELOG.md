@@ -1,4 +1,7 @@
 # 📝 CHANGELOG - EasyAdminDashboardBundle
+## [3.1.5]
+### ✅ Added
+- Affichage strict selon le rôle: possible de ne pas dépendre de la hiérarchie des rôles Symfony `hierarchy: false`
 
 ## [3.0] - 2025-04-04
 

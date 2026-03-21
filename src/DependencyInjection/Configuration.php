@@ -66,7 +66,6 @@ class Configuration implements ConfigurationInterface
                                         ->end()
                                         ->booleanNode('showCount')->defaultTrue()->end()
                                         ->scalarNode('action')->defaultValue('index')->end()
-                                        ->scalarNode('field')->defaultNull()->end()
                                         ->booleanNode('hierarchy')->defaultTrue()->end()
                                     ->end()
                                 ->end()
