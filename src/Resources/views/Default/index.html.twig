@@ -7,9 +7,9 @@
         {% for dblock in dashboard.blocks|default([]) %}
             {% for permission in dblock.permissions %}
                 {% if is_granted(permission) %}
-                    <div class="mt-3 pb-3 col-{{ dblock.size|default('12') }} border-bottom border-light">
+                    <div class="mt-2 pb-2 col-{{ dblock.size|default('12') }} border-bottom border-light">
                         <h3 class="text-{{ dblock.css_class|default('secondary') }} mb-3">
-                            {{ dblock.label|trans }}
+                            {{ dblock.label|trans }} plop
                         </h3>
                         <div class="card-group">
                             {% for entity, item in dblock.items|default([]) %}
