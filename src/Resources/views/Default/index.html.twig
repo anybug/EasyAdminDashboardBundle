@@ -9,7 +9,7 @@
                 {% if is_granted(permission) %}
                     <div class="mt-2 pb-2 col-{{ dblock.size|default('12') }} border-bottom border-light">
                         <h3 class="text-{{ dblock.css_class|default('secondary') }} mb-3">
-                            {{ dblock.label|trans }} plop
+                            {{ dblock.label|trans }}
                         </h3>
                         <div class="card-group">
                             {% for entity, item in dblock.items|default([]) %}
