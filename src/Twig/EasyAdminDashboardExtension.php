@@ -10,6 +10,7 @@ class EasyAdminDashboardExtension extends AbstractExtension
 {
     private $config;
     private $tokenStorage;
+    private $authorizationChecker;
 
     public function __construct(
         array $config, 

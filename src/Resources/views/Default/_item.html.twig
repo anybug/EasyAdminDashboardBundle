@@ -1,10 +1,16 @@
 
-<div class="col-lg-{{ item.size|default('3') }}">
+<div class="col-xl-{{ item.size|default('3') }}">
     <div class="card border-{{ item.css_class|default('secondary') }} mb-3 me-3">
         <div class="card-header bg-light">
-            <h6>
+            <h6 class="text-nowrap">
                 {% if item.link_label is defined %}<a href="{{ ea_url().setController(item.controller).setAction(item.action|default('index')).set('entityFqcn', item.class) }}" class="text-{{ item.css_class|default('secondary') }}">{% endif %}
-                    {% if item.icon is defined and item.icon %}<i class="fa fa-{{ item.icon }}"></i> {% endif %}{{ item.label|default('items')|trans }} <span class="badge badge-dark">{{ item.count }}</span>
+                    {% if item.icon is defined and item.icon %}
+                        <i class="fa fa-{{ item.icon }}"></i>
+                    {% endif %}
+                    {{ item.label|default('items')|trans }} 
+                    {% if item.showCount %}
+                        <span class="badge badge-dark">{{ item.count }}</span>
+                    {% endif %}
                 {% if item.link_label is defined %}</a>{% endif %}
             </h6>
         </div>
