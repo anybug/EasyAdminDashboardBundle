@@ -46,6 +46,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarPrototype()->end()
                                 ->defaultValue([])
                             ->end()
+                            ->scalarNode('route')->defaultValue('admin')->end()
                             ->booleanNode('hierarchy')->defaultTrue()->end()
                             ->arrayNode('items')
                                 ->useAttributeAsKey('name')

@@ -5,8 +5,8 @@
     {% if dashboard.blocks|length > 0 %}
         <div class="dashboard-content row m-1">
         {% for key, dblock in dashboard.blocks|default([]) %}
-            
-            {% if can_access_block(key) %}
+
+            {% if can_access_block(key) and app.request.get('_route') starts with dblock.route %}
                 <div class="mt-2 pb-2 col-{{ dblock.size|default('12') }} border-bottom border-light">
                     <h3 class="text-{{ dblock.css_class|default('secondary') }} text-nowrap mb-3">
                         {{ dblock.label|trans }}

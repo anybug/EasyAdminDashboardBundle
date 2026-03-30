@@ -11,7 +11,7 @@ some counters, like a dashboard.
 
 This bundle requires:
 
-    * PHP 8.2 or higher
+    * PHP 8.4 or higher
     * Symfony 6.4 or higher
     * EasyAdmin 4.2x
     
@@ -61,6 +61,8 @@ easy_admin_dashboard:
       size: 12
       css_class: primary
       permissions: ['ROLE_USER']
+      hierarchy: false
+      route: app #not compatible with hierarchy = false
       items:
         Product:
           label: "Active products in catalog"
@@ -70,9 +72,8 @@ easy_admin_dashboard:
           controller: App\Controller\Admin\ProductCrudController
           icon:  shopping-cart
           link_label: "Product list"
-          permissions: ['ROLE_ADMIN']
           query: MyCustomQuery
-          hierarchy: false
+          
         ProductCategory:
           label: "Categories"
           size: 3
@@ -84,7 +85,6 @@ easy_admin_dashboard:
           permissions: ['ROLE_ADMIN']
           dql_filter: "entity.is_active = 1"
           showCount: false
-          action: 'detail'
 			
 ````
 

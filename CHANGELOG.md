@@ -1,4 +1,8 @@
 # 📝 CHANGELOG - EasyAdminDashboardBundle
+## [3.1.7]
+### ✅ Added
+- "route" parameter (easier to manage than hierarchy)
+
 ## [3.1.6]
 ### ✅ Added
 - Show count (true/false)
